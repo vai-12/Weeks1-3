@@ -6,11 +6,31 @@ public class HeadRotationScript : MonoBehaviour
 {
     // This is the speed of rotation
     public float rotationSpeed = 100f;
+    
+    // Key bindings for left and right rotation
+    public KeyCode rotateLeftKey = KeyCode.A;
+    public KeyCode rotateRightKey = KeyCode.D;
 
     void Update()
     {
-        // Rotate the head based on input, A/D or left/right keys
-        float input = Input.GetAxis("Horizontal");
-        transform.Rotate(0f, 0f, -input * rotationSpeed * Time.deltaTime);
+        // Initialize rotation
+        float input = 0f;
+
+        // Check if the left rotation key or right rotation key is pressed
+        if (Input.GetKey(rotateLeftKey))
+        {
+            // Rotate head counterclockwise
+            input = -1f; 
+        }
+
+        else if (Input.GetKey(rotateRightKey))
+        {  
+            // Rotate head clockwise
+            input = 1f;
+        }
+
+        // Apply the rotation
+        transform.Rotate(0f, 0f, input * rotationSpeed * Time.deltaTime);
     }
+    
 }
